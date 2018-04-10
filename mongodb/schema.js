@@ -8,18 +8,9 @@ mongoose.connect(url);
 exports.ArticleSchema = new Schema({
   title: { type: String },
   content: { type: String },
-  is_deleted: {
-    type: String,
-    default: '0'
-  },
+  is_deleted: { type: String, default: '0' },
   meta: {
-    created_at: {
-      type: Date,
-      default: Date.now()
-    },
-    update_at: {
-      type: Date,
-      default: Date.now()
-    }
+    created_at: { type: Date, default: Date.now() },
+    update_at: { type: Date, default: Date.now() }
   }
 })

@@ -6,10 +6,10 @@ var ENV = process.env.NODE_ENV;
 // 生产环境
 if (ENV === 'production') {
   port = 8000;
-  url = '';
+  url = 'mongodb://localhost/blog';
 }
 
-module.export = {
+module.exports = {
   port: port,
   url: url
 }
