@@ -5,10 +5,19 @@ const ArticleSchema = require('../mongodb/schema').ArticleSchema;
 
 var Article = mongoose.model('article', ArticleSchema);
 
+// 获取全部文章
 router.get('/', function (req, res, next) {
-  res.render('blog/home')
+
+  var documents = null;
+
+  Article.find({}, function (err, doc) {
+    documents = doc;
+    res.render('blog/home', { articles: documents })
+  })
+
 })
 
+// 新增一篇文章
 router.post('/', function (req, res, next) {
 
   const articleObject = {
@@ -23,6 +32,11 @@ router.post('/', function (req, res, next) {
       res.json({ msg: '上传文章失败', status: 'err' })
     }
   })
+
+})
+
+// 删除一篇文章
+router.delete('/', function (err, doc) {
 
 })
 
