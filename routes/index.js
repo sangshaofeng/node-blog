@@ -1,5 +1,10 @@
 // 全部路由出口
-module.export = function (app) {
+module.exports = function (app) {
 
+  app.get('/', function (req, res, next) {
+    res.render('blog/home')
+  })
+
+  app.use('/article', require('./article'))
 
 }
