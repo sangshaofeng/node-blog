@@ -16,9 +16,12 @@ router.post('/', function (req, res, next) {
     content: req.body.content
   }
 
-  Article.create(articleObject).exec()
-  .then(function (doc) {
-    console.log(doc)
+  Article.create(articleObject, function (err, doc) {
+    if (!err) {
+      res.json({ msg: '上传文章成功', status: 'succ' })
+    } else {
+      res.json({ msg: '上传文章失败', status: 'err' })
+    }
   })
 
 })

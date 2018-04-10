@@ -18,10 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // 注册路由
 routes(app);
 
-console.log(port)
-
 var server = app.listen(port, function () {
     var host = server.address().address;
     var _port = server.address().port;
-    console.log('App listening at http://%s:%s', host, _port);
+    console.log('App is listening at http://%s:%s', host, _port);
 });
