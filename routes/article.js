@@ -7,10 +7,16 @@ var Article = mongoose.model('article', ArticleSchema);
 
 // 获取全部文章
 router.get('/', function (req, res, next) {
-  const labelId = req.query.labelId;
-  Article.find({}, function (err, doc) {
-    res.render('blog/home', { articles: doc })
-  })
+  var cateId = req.query.cateId;
+  if (typeof cateId === 'undefined') {
+    Article.find({}, function (err, doc) {
+      res.render('blog/home', { articles: doc })
+    })
+  } else {
+    Article.find({ category: cateId }, function (err, doc) {
+      res.render('blog/home', { articles: doc })
+    })
+  }
 })
 
 // 新增一篇文章
