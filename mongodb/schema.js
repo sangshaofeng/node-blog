@@ -13,4 +13,4 @@ exports.ArticleSchema = new Schema({
     created_at: { type: Date, default: Date.now() },
     update_at: { type: Date, default: Date.now() }
   }
-})
+}, { versionKey: false })
