@@ -28,4 +28,4 @@ exports.ArticleComments = new Schema({
   isDeleted: { type: String, default: '0' },
   createdAt: { type: Date, default: Date.now() },
   articleId: { type: Schema.Types.ObjectId, ref: 'articles' }
-})
+}, { versionKey: false })
