@@ -17,7 +17,8 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   const articleObject = {
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    category: req.body.labelId
   }
   Article.create(articleObject, function (err, doc) {
     if (!err) {
