@@ -5,6 +5,7 @@ module.exports = function (app) {
     res.render('blog/home')
   })
 
-  app.use('/article', require('./article'))
+  app.use('/article', require('./article'));
+  app.use('/category', require('./category'));
 
 }
