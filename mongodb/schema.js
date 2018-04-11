@@ -8,9 +8,24 @@ mongoose.connect(url);
 exports.ArticleSchema = new Schema({
   title: { type: String },
   content: { type: String },
-  is_deleted: { type: String, default: '0' },
+  isDeleted: { type: String, default: '0' },
+  category: { type: Schema.Types.ObjectId, ref: 'categories' },
   meta: {
-    created_at: { type: Date, default: Date.now() },
-    update_at: { type: Date, default: Date.now() }
+    createdAt: { type: Date, default: Date.now() },
+    updateAt: { type: Date, default: Date.now() }
   }
 }, { versionKey: false })
+
+// 文章分类标签schema
+exports.ArticleCate = new Schema({
+  label: { type: String },
+  createdAt: { type: Date, default: Date.now() }
+}, { versionKey: false })
+
+// 文章留言schema
+exports.ArticleComments = new Schema({
+  nickname: { type: String },
+  isDeleted: { type: String, default: '0' },
+  createdAt: { type: Date, default: Date.now() },
+  articleId: { type: Schema.Types.ObjectId, ref: 'articles' }
+})
