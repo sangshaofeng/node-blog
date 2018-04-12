@@ -1,0 +1,21 @@
+// 设置定位类型和定位位置和宽高
+.position (@type; @top: auto; @right: auto; @bottom: auto; @left: auto; @width: auto; @height: auto) {
+  position: @type;
+  top: @top;
+  right: @right;
+  bottom: @bottom;
+  left: @left;
+  width: @width;
+  height: @height;
+}
+
+// 设置flex布局
+.flex-layout (@type; @flex-flow; @justify-content; @align-items) {
+  display: @type;
+  flex-flow: @flex-flow;
+  justify-content: @justify-content;
+  align-items: @align-items;
+}
+
+@primary-color: #0084ff;
+

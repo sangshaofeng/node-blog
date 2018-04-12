@@ -1,0 +1,40 @@
+@import '../utils.less';
+.main{
+  width: 1100px;
+  height: auto;
+  padding: 16px 10px;
+  margin: 20px auto;
+  background: #fff;
+  .category-tags{
+    width: 100%;
+    ul{
+      .flex-layout(flex, row wrap, flex-start, center);
+      li{
+        font-weight: bold;
+        cursor: pointer;
+        margin: 10px 23px 10px 0;
+        transition: all .1s ease-in;
+        &:hover{
+          color: @primary-color;
+        }
+        &.active a{
+          color: @primary-color;
+        }
+      }
+    }
+  }
+  .content-area{
+    margin-top: 40px;
+    .flex-layout(flex, row nowrap, space-between, flex-start);
+    .articles-wrapper{
+      width: 680px;
+      height: 200px;
+      background: #eee;
+    }
+    .other-info-wrapper{
+      width: 400px;
+      height: 200px;
+      background: #eee;
+    }
+  }
+}

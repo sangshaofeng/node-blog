@@ -2,11 +2,49 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="/style/common/global.css">
+  <link rel="stylesheet" href="/style/common/nav.css">
+  <link rel="stylesheet" href="/style/home/home.css">
   <title></title>
 </head>
 <body>
+
 <div class="">
-  <%= articles %>
+  <%- include('components/nav') %>
+
+  <div class="main">
+    <!--分类标签-->
+    <div class="category-tags">
+      <ul>
+        <li class="active">
+          <a href="#">HTML</a>
+        </li>
+        <li>
+          <a href="">CSS</a>
+        </li>
+        <li>
+          <a href="">JavaScript</a>
+        </li>
+        <li>
+          <a href="">前端</a>
+        </li>
+      </ul>
+    </div>
+    <!--内容区-->
+    <div class="content-area">
+
+      <div class="articles-wrapper">
+        <div class="article-item">
+          123
+        </div>
+      </div>
+
+      <div class="other-info-wrapper">
+
+      </div>
+
+    </div>
+  </div>
 </div>
 </body>
 </html>
