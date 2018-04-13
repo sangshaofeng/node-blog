@@ -24,9 +24,24 @@ router.post('/', function (req, res, next) {
   const articleObject = {
     title: req.body.title,
     content: req.body.content,
-    category: req.body.labelId,
-    summary: req.body.summary
+    summary: req.body.summary,
+    category: req.body.labelId
   }
+
+  if (!articleObject.title || articleObject.title === '') {
+    res.json({ msg: '缺少文章标题', status: 'err' });
+    return false;
+  } else if (!articleObject.content || articleObject.content === '') {
+    res.json({ msg: '缺少文章内容', status: 'err' });
+    return false;
+  } else if (!articleObject.summary || articleObject.summary === '') {
+    res.json({ msg: '缺少文章摘要', status: 'err' });
+    return false;
+  } else if (!articleObject.category || articleObject.category === '') {
+    res.json({ msg: '缺少文章分类', status: 'err' });
+    return false;
+  }
+
   Article.create(articleObject, function (err, doc) {
     if (!err) {
       res.json({ msg: '上传文章成功', status: 'succ' })
