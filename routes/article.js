@@ -24,7 +24,8 @@ router.post('/', function (req, res, next) {
   const articleObject = {
     title: req.body.title,
     content: req.body.content,
-    category: req.body.labelId
+    category: req.body.labelId,
+    summary: req.body.summary
   }
   Article.create(articleObject, function (err, doc) {
     if (!err) {

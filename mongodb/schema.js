@@ -8,6 +8,7 @@ mongoose.connect(url);
 exports.ArticleSchema = new Schema({
   title: { type: String },
   content: { type: String },
+  summary: { type: String },
   isDeleted: { type: String, default: '0' },
   category: { type: Schema.Types.ObjectId, ref: 'categories' },
   meta: {
