@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const ArticleSchema = require('../mongodb/schema').ArticleSchema;
+const ArticleComments = require('../mongodb/schema').ArticleComments;
 
 var Article = mongoose.model('article', ArticleSchema);
+var Comments = mongoose.model('comment', ArticleComments);
 
 // 获取全部文章
 router.get('/', function (req, res, next) {
@@ -53,6 +55,11 @@ router.post('/', function (req, res, next) {
       res.json({ msg: '上传文章失败', status: 'err' })
     }
   })
+})
+
+// 编辑文章
+router.put('/', function (req, res, next) {
+
 })
 
 // 删除一篇文章
