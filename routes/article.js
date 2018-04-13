@@ -25,6 +25,7 @@ router.post('/', function (req, res, next) {
     title: req.body.title,
     content: req.body.content,
     summary: req.body.summary,
+    author: req.body.author,
     category: req.body.labelId
   }
 
@@ -36,6 +37,9 @@ router.post('/', function (req, res, next) {
     return false;
   } else if (!articleObject.summary || articleObject.summary === '') {
     res.json({ msg: '缺少文章摘要', status: 'err' });
+    return false;
+  } else if (!articleObject.author || articleObject.author === '') {
+    res.json({ msg: '缺少作者', status: 'err' });
     return false;
   } else if (!articleObject.category || articleObject.category === '') {
     res.json({ msg: '缺少文章分类', status: 'err' });
