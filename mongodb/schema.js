@@ -27,6 +27,7 @@ exports.ArticleCate = new Schema({
 // 文章留言schema
 exports.ArticleComments = new Schema({
   nickname: { type: String },
+  comment: { type: String },
   isDeleted: { type: String, default: '0' },
   createdAt: { type: Date, default: Date.now() },
   articleId: { type: Schema.Types.ObjectId, ref: 'articles' }
