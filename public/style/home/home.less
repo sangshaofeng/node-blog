@@ -31,7 +31,50 @@
     .articles-wrapper{
       width: 680px;
       height: 200px;
-      background: #eee;
+      .article-item{
+        width: 100%;
+        margin-top: 14px;
+        color: @font-light-color;
+        border-bottom: 1px solid #eee;
+        .flex-layout(flex, column nowrap, flex-start, flex-start);
+        &:first-of-type{
+          margin-top: 0;
+        }
+        .article-header{
+          .published-at{
+            margin-left: 20px;
+          }
+        }
+        h3{
+          cursor: pointer;
+          color: @font-bold-color;
+          margin: 14px 0;
+          transition: color, .2s ease-in-out;
+          &:hover{
+            color: @primary-color;
+          }
+        }
+        p{
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+        }
+        .article-footer{
+          margin: 14px 0;
+          .comments-wrapper{
+            cursor: pointer;
+            .flex-layout(flex, row nowrap, flex-start, center);
+            transition: all .2s ease-in-out;
+            &:hover{
+              filter: brightness(.85);
+            }
+            .comments{
+              margin: -1px 0 0 4px;
+            }
+          }
+        }
+      }
     }
     .other-info-wrapper{
       width: 400px;
