@@ -5,6 +5,18 @@ const ArticleComments = require('../mongodb/schema').ArticleComments;
 
 var Comments = mongoose.model('comment', ArticleComments);
 
+// 获取评论
+router.get('/', function (req, res, next) {
+  const articleId = req.query.articleId;
+  Comments.find({ articleId: articleId }, function (err, doc) {
+    if (!err) {
+      res.json({ data: doc, msg: '获取成功', status: 'succ' });
+    } else {
+      res.json({ msg: '获取失败', status: 'err' });
+    }
+  })
+})
+
 // 添加评论
 router.post('/', function (req, res, next) {
   const commentObject = {
