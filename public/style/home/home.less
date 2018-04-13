@@ -30,7 +30,6 @@
     .flex-layout(flex, row nowrap, space-between, flex-start);
     .articles-wrapper{
       width: 680px;
-      height: 200px;
       .article-item{
         width: 100%;
         margin-top: 14px;
@@ -77,9 +76,28 @@
       }
     }
     .other-info-wrapper{
-      width: 400px;
+      width: 390px;
       height: 200px;
-      background: #eee;
+      p{
+        font-weight: bold;
+      }
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+  .main{
+    width: 100%;
+    margin-top: 5px;
+    box-sizing: border-box;
+    .content-area{
+      width: 100%;
+      margin-top: 20px;
+      .articles-wrapper{
+        width: 100%;
+      }
+      .other-info-wrapper{
+        display: none;
+      }
     }
   }
 }
