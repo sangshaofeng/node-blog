@@ -62,14 +62,21 @@
         .article-footer{
           margin: 14px 0;
           .comments-wrapper{
+            display: inline-block;
             cursor: pointer;
             .flex-layout(flex, row nowrap, flex-start, center);
             transition: all .2s ease-in-out;
             &:hover{
               filter: brightness(.85);
             }
+            .category{
+              margin: 0 16px 0 0;
+            }
             .comments{
               margin: -1px 0 0 4px;
+            }
+            svg{
+              margin-top: 1px;
             }
           }
         }
