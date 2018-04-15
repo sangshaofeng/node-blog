@@ -12,7 +12,8 @@ exports.ArticleSchema = new Schema({
   author: { type: String },                                      
   commentsAmount: { type: Number, default: 0 },                    
   isDeleted: { type: String, default: '0' },                       
-  category: { type: Schema.Types.ObjectId, ref: 'categories' },   
+  category: { type: Schema.Types.ObjectId, ref: 'categories' }, 
+  cateLabel: { type: String },  
   meta: {
     createdAt: { type: Date, default: Date.now() },
     updateAt: { type: Date, default: Date.now() }
