@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const ArticleSchema = require('../mongodb/schema').ArticleSchema;
 const ArticleComments = require('../mongodb/schema').ArticleComments;
 
+var Article = mongoose.model('article', ArticleSchema);
 var Comments = mongoose.model('comment', ArticleComments);
 
 // 获取评论
@@ -36,10 +38,17 @@ router.post('/', function (req, res, next) {
     return false;
   }
 
-  Comments.create(commentObject, function (err, doc) {
+  Comments.create((commentObject), function (err, doc) {
     if (!err) {
       res.json({ msg: '评论成功', status: 'succ' });
+      Comments.count({ articleId: commentObject.articleId }, function (err, count) {
+        Article.findById(commentObject.articleId, function (err, article) {
+          article.set({ commentsAmount: count });
+          article.save();
+        })
+      })
     } else {
+      console.log(err);
       res.json({ msg: '评论失败', status: 'succ' });
     }
   })
