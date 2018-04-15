@@ -6,12 +6,13 @@ mongoose.connect(url);
 
 // 文章schema
 exports.ArticleSchema = new Schema({
-  title: { type: String },
-  content: { type: String },
-  summary: { type: String },
-  author: { type: String },
-  isDeleted: { type: String, default: '0' },
-  category: { type: Schema.Types.ObjectId, ref: 'categories' },
+  title: { type: String },                                   
+  content: { type: String },                                    
+  summary: { type: String },                                                              
+  author: { type: String },                                      
+  commentsAmount: { type: Number, default: 0 },                    
+  isDeleted: { type: String, default: '0' },                       
+  category: { type: Schema.Types.ObjectId, ref: 'categories' },   
   meta: {
     createdAt: { type: Date, default: Date.now() },
     updateAt: { type: Date, default: Date.now() }
