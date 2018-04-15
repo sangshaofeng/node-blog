@@ -2,23 +2,32 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const ArticleSchema = require('../mongodb/schema').ArticleSchema;
-const ArticleComments = require('../mongodb/schema').ArticleComments;
+const ArticleCate = require('../mongodb/schema').ArticleCate;
 
 var Article = mongoose.model('article', ArticleSchema);
-var Comments = mongoose.model('comment', ArticleComments);
+var Category = mongoose.model('category',  ArticleCate);
 
-// 获取全部文章
+// 获取全部文章和标签
 router.get('/', function (req, res, next) {
   var cateId = req.query.cateId;
   if (typeof cateId === 'undefined') {
-    Article.find({}, function (err, doc) {
-      res.render('blog/home', { articles: doc })
+    Article.find({}).sort({'_id': -1}).limit(5).exec(function (err, doc) {
+      Category.find({}).exec(function (err, tags) {
+        res.render('blog/home', { articles: doc, tags: tags })
+      })
     })
   } else {
-    Article.find({ category: cateId }, function (err, doc) {
-      res.render('blog/home', { articles: doc })
+    Article.find({ category: cateId }).sort({'_id': -1}).limit(5).exec(function (err, doc) {
+      Category.find({}).exec(function (err, tags) {
+        res.render('blog/home', { articles: doc, tags: tags })
+      })
     })
   }
+})
+
+// 获取文章详情
+router.get('/details', function (req, res, next) {
+  
 })
 
 // 新增一篇文章
@@ -28,7 +37,8 @@ router.post('/', function (req, res, next) {
     content: req.body.content,
     summary: req.body.summary,
     author: req.body.author,
-    category: req.body.labelId
+    category: req.body.labelId,
+    cateLabel: req.body.cateLabel
   }
 
   if (!articleObject.title || articleObject.title === '') {
@@ -42,6 +52,9 @@ router.post('/', function (req, res, next) {
     return false;
   } else if (!articleObject.author || articleObject.author === '') {
     res.json({ msg: '缺少作者', status: 'err' });
+    return false;
+  } else if (!articleObject.cateLabel || articleObject.cateLabel === '') {
+    res.json({ msg: '缺少分类标签名者', status: 'err' });
     return false;
   } else if (!articleObject.category || articleObject.category === '') {
     res.json({ msg: '缺少文章分类', status: 'err' });
