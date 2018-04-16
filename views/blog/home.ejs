@@ -31,7 +31,7 @@
             <span>作者：<span><%= item.author %></span></span>
             <span class="published-at">发布时间：<%= item.meta.createdAt %></span>
           </div>
-          <h3><%= item.title %></h3>
+          <h3><a href="/article/details?id=<%= item._id %>"><%= item.title %></a></h3>
           <p><%= item.summary %></p>
           <div class="article-footer">
             <div class="comments-wrapper">

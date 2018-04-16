@@ -27,7 +27,10 @@ router.get('/', function (req, res, next) {
 
 // 获取文章详情
 router.get('/details', function (req, res, next) {
-  
+  const id = req.query.id;
+  Article.find({ _id: id }, function (err, doc) {
+    console.log(doc)
+  })
 })
 
 // 新增一篇文章
@@ -75,7 +78,7 @@ router.put('/', function (req, res, next) {
 
 })
 
-// 删除一篇文章
+// 删除文章，其下的评论也一并删除
 router.delete('/', function (err, doc) {
 
 })
