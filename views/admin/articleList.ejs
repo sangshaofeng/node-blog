@@ -4,12 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <link rel="stylesheet" href="/style/common/global.css">
-  <link rel="stylesheet" href="/style/common/nav.css">
+  <link rel="stylesheet" href="/style/admin/header/header.css">
+  <link rel="stylesheet" href="/style/admin/sidebar/sidebar.css">
+  <link rel="stylesheet" href="/style/admin/articlelist/articlelist.css">
   <title></title>
 </head>
 <body>
-<div class="">
-  gfgderfgw
+<%- include('components/header') %>
+<%- include('components/sidebar') %>
+<div class="content-wrapper">
+  <div class="content">
+    <%= menu %>
+  </div>
 </div>
 </body>
 </html>
