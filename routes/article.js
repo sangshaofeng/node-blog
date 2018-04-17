@@ -7,22 +7,30 @@ const ArticleCate = require('../mongodb/schema').ArticleCate;
 var Article = mongoose.model('article', ArticleSchema);
 var Category = mongoose.model('category',  ArticleCate);
 
-// 获取全部文章和标签
+// 获取首页文章和标签，ajax=true表示ajax请求，不加ajax字段表示直接客户端请求
 router.get('/', function (req, res, next) {
   var cateId = req.query.cateId;
-  if (typeof cateId === 'undefined') {
-    Article.find({}).sort({'_id': -1}).limit(5).exec(function (err, doc) {
-      Category.find({}).exec(function (err, tags) {
-        res.render('blog/home', { articles: doc, tags: tags })
-      })
-    })
-  } else {
-    Article.find({ category: cateId }).sort({'_id': -1}).limit(5).exec(function (err, doc) {
-      Category.find({}).exec(function (err, tags) {
-        res.render('blog/home', { articles: doc, tags: tags })
-      })
-    })
+  var page = parseInt(req.query.page)
+  var ajax = req.query.ajax;
+  var query = Article.find({}).sort({'_id': -1});
+  if (!page || page === '') page = 1;
+  if (typeof cateId !== 'undefined') {
+    query = Article.find({ category: cateId }).sort({'_id': -1});
   }
+  query.skip((page - 1) * 5); query.limit(5);
+  query.exec(function (err, doc) {
+    Article.find(function (err, result) {
+      Category.find({}).exec(function (err, tags) {
+        var totalPages = Math.ceil(result.length / 5);
+        var currentPage = page;
+        if (!ajax) {
+          res.render('blog/home', { articles: doc, tags: tags, totalPages: totalPages, currentPage: currentPage })
+        } else {
+          res.json({ articles: doc, tags: tags, totalPages: totalPages, currentPage: currentPage })
+        }
+      })
+    })
+  })
 })
 
 // 获取文章详情
