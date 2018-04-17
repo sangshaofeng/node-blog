@@ -9,12 +9,41 @@
   <link rel="stylesheet" href="/style/admin/articlenew/articlenew.css">
   <title></title>
 </head>
+
 <body>
 <%- include('components/header') %>
 <%- include('components/sidebar') %>
 <div class="content-wrapper">
   <div class="content">
-      articlenew
+    <div class="form">
+      <div class="form-group">
+        <label for="[object Object]">分类：</label>
+        <select class="" name="" placeholder="选择分类">
+          <option value="">HTML</option>
+          <option value="">CSS</option>
+          <option value="">JavaScript</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">标题：</label>
+        <input type="text" name="" value="" placeholder="输入文章标题">
+      </div>
+      <div class="form-group">
+        <label for="">摘要：</label>
+        <input type="text" name="" value="" placeholder="输入文章摘要">
+      </div>
+      <div class="form-group">
+        <label for="">作者：</label>
+        <input type="text" name="" value="" placeholder="署名作者">
+      </div>
+      <div class="form-group">
+        <label for="">正文：</label>
+        <textarea name="name" rows="8"></textarea>
+      </div>
+      <div class="btn-wrapper">
+        <div class="btn btn-primary">提交</div>
+      </div>
+    </div>
   </div>
 </div>
 </body>

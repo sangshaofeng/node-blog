@@ -1,0 +1,61 @@
+@import "../../utils.less";
+.content-wrapper{
+  padding: 0 30px;
+  margin-left: 140px;
+  box-sizing: border-box;
+  .content{
+    width: 100%;
+    margin-top: 50px;
+    .form{
+      width: 800px;
+      text-align: center;
+      margin: 0 auto;
+      .form-group{
+        margin-bottom: 30px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        select{
+          width: 90%;
+          height: 40px;
+          outline: none;
+          padding-left: 15px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          &:focus{
+            border: 1px solid @primary-color;
+          }
+        }
+        input{
+          width: 90%;
+          height: 40px;
+          outline: none;
+          padding-left: 15px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          &:focus{
+            border: 1px solid @primary-color;
+          }
+        }
+        textarea{
+          width: 90%;
+          padding: 15px;
+          outline: none;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          &:focus{
+            border: 1px solid @primary-color;
+          }
+        }
+      }
+      .btn-wrapper{
+        float: left;
+        margin-left: 80px;
+      }
+    }
+  }
+}
