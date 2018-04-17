@@ -7,24 +7,27 @@
     content: '',
     summary: '',
     author: '',
-    category: '',
+    labelId: '',
     cateLabel: ''
   }
 
   getCateTags();
 
+  // 提交文章数据按钮点击
   $('#submit-btn').click(function () {
     params.title = $('input[name=title]').val();
     params.content = $('textarea[name=content]').val();
     params.summary = $('input[name=summary]').val();
     params.author = $('input[name=author]').val();
-    params.category = $('select[name=category]').val();
+    params.labelId = $('select[name=category]').val();
     params.cateLabel = $('select[name=category]').find('option:selected').text();
-    console.log(params)
+    submitArticle(params);
   })
 
+  // 添加标签模态框显示隐藏
   $('#add-tag-btn').click(function (e) {
     $('#add-tags-modal').fadeToggle(150);
+    $('input[name=label]').val('')
     e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true
   })
   $('#add-tags-modal').click(function (e) {
@@ -33,6 +36,12 @@
   $(document).click(function (e) {
     $('#add-tags-modal').fadeOut(150);
     e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true
+  })
+
+  // 添加分类标签确定点击
+  $('#confirm-post-tag').click(function () {
+    var labelName = $('input[name=label]').val();
+    submitCateTag(labelName);
   })
 
   // 获取全部分类标签
@@ -44,6 +53,24 @@
       success: function (res) {
         if (res.status === 'succ') {
           appendTags(res.data);
+        }
+      }
+    })
+  }
+
+  // 提交分类标签
+  function submitCateTag (labelName) {
+    $.ajax({
+      url: '/category/tags',
+      type: 'post',
+      data: {
+        label: labelName
+      },
+      dataType: 'json',
+      success: function (res) {
+        alert(res);
+        if (res.status === 'succ') {
+          $('#add-tags-modal').fadeOut(150);
         }
       }
     })
@@ -64,10 +91,13 @@
     $.ajax({
       url: '/article',
       type: 'post',
-      data: '',
+      data: params,
       dataType: 'json',
       success: function (res) {
-
+        alert(res.msg);
+        if (res.status === 'succ') {
+          resetValue();
+        }
       }
     })
   }
@@ -78,7 +108,6 @@
     $('textarea[name=content]').val('');
     $('input[name=summary]').val('');
     $('input[name=author]').val('');
-    $('select[name=category]').val('');
   }
 
 })()
