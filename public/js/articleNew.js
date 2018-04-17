@@ -23,6 +23,18 @@
     console.log(params)
   })
 
+  $('#add-tag-btn').click(function (e) {
+    $('#add-tags-modal').fadeToggle(150);
+    e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true
+  })
+  $('#add-tags-modal').click(function (e) {
+    e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true
+  })
+  $(document).click(function (e) {
+    $('#add-tags-modal').fadeOut(150);
+    e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true
+  })
+
   // 获取全部分类标签
   function getCateTags () {
     $.ajax({

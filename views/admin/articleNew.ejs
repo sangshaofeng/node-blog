@@ -17,12 +17,19 @@
   <div class="content">
     <div class="form">
       <div class="form-group">
-        <label for="[object Object]">分类：</label>
+        <label for="">分类：</label>
         <select class="" name="category" placeholder="选择分类">
           <option value="1">HTML</option>
           <option value="2">CSS</option>
           <option value="3">JavaScript</option>
         </select>
+        <div class="add-tags-wrapper">
+          <div id="add-tag-btn" class="btn btn-primary add-btn" title="添加分类标签">添加</div>
+          <div id="add-tags-modal" class="add-tags-modal" style="display:none">
+            <input type="text" name="" value="" placeholder="标签名">
+            <div class="btn btn-primary">确定</div>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="">标题：</label>
@@ -41,7 +48,7 @@
         <textarea name="content" rows="8"></textarea>
       </div>
       <div class="btn-wrapper">
-        <div id="submit-btn" class="btn btn-primary">提交</div>
+        <div id="submit-btn" class="btn btn-primary" title="提交文章">提交</div>
       </div>
     </div>
   </div>
