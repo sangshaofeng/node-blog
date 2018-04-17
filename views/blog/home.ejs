@@ -50,10 +50,10 @@
         <!--分页-->
         <div class="pagination">
           <div class="block curr-total-count"><%= currentPage %> / <%= totalPages %></div>
-          <div class="block">首页</div>
-          <div class="block">上一页</div>
-          <div class="block">下一页</div>
-          <div class="block">末页</div>
+          <div id="btn-first" class="block">首页</div>
+          <div id="btn-prev" class="block">上一页</div>
+          <div id="btn-next" class="block">下一页</div>
+          <div id="btn-last" class="block">末页</div>
         </div>
       </div>
       <!--右侧边栏-->
@@ -65,5 +65,13 @@
     </div>
   </div>
 </div>
+
+<script src="/js/library/jquery3.3.1.min.js"></script>
+<script src="/js/library/jquery.tmpl.min.js"></script>
+<script>
+  var currentPage = parseInt('<%= currentPage %>')
+  var totalPages = parseInt('<%= totalPages %>')
+</script>
+<script src="/js/home.js"></script>
 </body>
 </html>

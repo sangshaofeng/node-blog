@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
         if (!ajax) {
           res.render('blog/home', { articles: doc, tags: tags, totalPages: totalPages, currentPage: currentPage })
         } else {
-          res.json({ articles: doc, tags: tags, totalPages: totalPages, currentPage: currentPage })
+          res.json({ data: doc, totalPages: totalPages, currentPage: currentPage, msg: '获取成功', status: 'succ' })
         }
       })
     })
