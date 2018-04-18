@@ -52,6 +52,7 @@
   }
 
   // 渲染文章，使用tmpl模板和ejs有冲突，直接js写模板
+  // 需要浏览器兼容es6语法
   function renderArticles (doc) {
     var wrapper = $('#articles-wrapper')
     wrapper.empty();

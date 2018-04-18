@@ -33,14 +33,12 @@ router.get('/', function (req, res, next) {
       })
     })
   } else {
-    console.log(page)
     query.skip((page - 1) * 5); query.limit(5);
     query.exec(function (err, doc) {
       Article.find({ category: cateId }, function (err, result) {
         Category.find({}).exec(function (err, tags) {
           var totalPages = Math.ceil(result.length / 5);
           var currentPage = page;
-          console.log(doc.length, result.length)
           if (!ajax) {
             res.render('blog/home', { articles: doc, tags: tags, totalPages: totalPages, currentPage: currentPage })
           } else {
