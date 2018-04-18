@@ -37,7 +37,7 @@
   function getArticles (cateId, page) {
     var url = '/article';
     if (page && page !== '') url += '?page=' + page;
-    if (cateId !== null) url += '&cateId' + cateId;
+    if (cateId !== null) url += '&cateId=' + cateId;
     url += '&ajax=true';
     $.ajax({
       url: url,
