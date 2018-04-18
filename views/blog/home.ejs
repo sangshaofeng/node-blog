@@ -26,7 +26,7 @@
     <div class="content-area">
       <div class="left-area">
         <!--文章列表-->
-        <div class="articles-wrapper">
+        <div id="articles-wrapper" class="articles-wrapper">
           <% articles.forEach(function (item) { %>
           <div class="article-item">
             <div class="article-header">
@@ -49,7 +49,7 @@
         </div>
         <!--分页-->
         <div class="pagination">
-          <div class="block curr-total-count"><%= currentPage %> / <%= totalPages %></div>
+          <div id="curr-total-count" class="block curr-total-count"><%= currentPage %> / <%= totalPages %></div>
           <div id="btn-first" class="block">首页</div>
           <div id="btn-prev" class="block">上一页</div>
           <div id="btn-next" class="block">下一页</div>
