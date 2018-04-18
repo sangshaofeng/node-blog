@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <link rel="stylesheet" href="/style/common/global.css">
   <link rel="stylesheet" href="/style/common/nav.css">
+  <link rel="stylesheet" href="/style/article/article.css">
   <title></title>
 </head>
 <body>
-<div class="">
-  123
+<div class="container">
+  <%- include('components/nav') %>
+  <div class="main">
+    <div class="">
+      <span><%= article[0].content %></span>
+    </div>
+  </div>
 </div>
 </body>
 </html>

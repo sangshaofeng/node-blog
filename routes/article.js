@@ -54,7 +54,7 @@ router.get('/', function (req, res, next) {
 router.get('/details', function (req, res, next) {
   const id = req.query.id;
   Article.find({ _id: id }, function (err, doc) {
-    console.log(doc)
+    res.render('blog/article', { article: doc, test: {name: 'haha'} })
   })
 })
 
