@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <link rel="stylesheet" href="/style/common/global.css">
   <link rel="stylesheet" href="/style/common/nav.css">
+  <link rel="stylesheet" href="/style/common/sidebar.css">
   <link rel="stylesheet" href="/style/article/article.css">
   <title></title>
 </head>
@@ -12,10 +13,58 @@
 <div class="container">
   <%- include('components/nav') %>
   <div class="main">
-    <div class="">
-      <span><%= article[0].content %></span>
+    <div class="article-details-wrapper">
+      <div class="article">
+          <h3><%= article[0].title %></h3>
+          <div class="info">
+            <span>作者：<span><%= article[0].author %></span></span>
+            <span class="published-at">发布时间：<%= article[0].meta.createdAt %></span>
+          </div>
+          <article class="content">
+            <%= article[0].content %>
+          </article>
+          <div id="view-comments" class="comments-wrapper" title="查看评论">
+            <svg class="Zi Zi--Comment Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em">
+              <path d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z" fill-rule="evenodd"></path>
+            </svg>
+            <span class="comments"><%= article[0].commentsAmount %>条评论</span>
+          </div>
+      </div>
+    </div>
+    <!--右侧边栏-->
+    <%- include('components/sidebar') %>
+  </div>
+</div>
+
+<!--评论模态框-->
+<div id="comments-modal" class="modal-mask" style="display: none">
+  <div class="comments-modal">
+    <img id="close-modal-btn" class="close-btn" src="/images/close_btn.svg" alt="">
+    <div class="modal-header">
+      <h4>评论列表</h4>
+    </div>
+    <div id="comments-wrapper" class="modal-body">
+      <div class="comment-item">
+        <div class="top">
+          <img class="avatar" src="/images/avatar.svg" alt="">
+          <span class="nickname">用户昵称</span>
+        </div>
+        <div class="content">
+          <p>这里是评论正文这里是评论正文这里是评论正文这里是评论正文</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <input id="comment-content" type="text" placeholder="留下你的评论...">
+      <div class="bottom">
+        <input id="nickname" class="nickname" type="text" placeholder="填写你的昵称">
+        <div id="submit-btn" class="btn btn-primary">提交</div>
+      </div>
     </div>
   </div>
 </div>
+
+<script src="/js/library/jquery3.3.1.min.js"></script>
+<script src="/js/article.js"></script>
 </body>
 </html>
