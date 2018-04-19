@@ -11,9 +11,11 @@ var Category = mongoose.model('category',  ArticleCate);
 // doc是查询到的每页数据，result是全部数据
 router.get('/', function (req, res, next) {
   var cateId = req.query.cateId;
+  var label = req.query.label;
   var page = parseInt(req.query.page)
   var ajax = req.query.ajax;
   var query = Article.find({ category: cateId }).sort({'_id': -1});
+  if (!label || label === '') label = 'all';
   if (!page || page === '') page = 1;
   if (typeof cateId === 'undefined') {
     query = Article.find({}).sort({'_id': -1});
@@ -25,7 +27,7 @@ router.get('/', function (req, res, next) {
           var totalPages = Math.ceil(result.length / 5);
           var currentPage = page;
           if (!ajax) {
-            res.render('blog/home', { articles: doc, tags: tags, totalPages: totalPages, currentPage: currentPage })
+            res.render('blog/home', { articles: doc, tags: tags, label: label, totalPages: totalPages, currentPage: currentPage })
           } else {
             res.json({ data: doc, totalPages: totalPages, currentPage: currentPage, msg: '获取成功', status: 'succ' })
           }
@@ -40,7 +42,7 @@ router.get('/', function (req, res, next) {
           var totalPages = Math.ceil(result.length / 5);
           var currentPage = page;
           if (!ajax) {
-            res.render('blog/home', { articles: doc, tags: tags, totalPages: totalPages, currentPage: currentPage })
+            res.render('blog/home', { articles: doc, tags: tags, label: label, totalPages: totalPages, currentPage: currentPage })
           } else {
             res.json({ data: doc, totalPages: totalPages, currentPage: currentPage, msg: '获取成功', status: 'succ' })
           }

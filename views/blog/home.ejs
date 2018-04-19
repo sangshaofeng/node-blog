@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <link rel="stylesheet" href="/style/common/global.css">
   <link rel="stylesheet" href="/style/common/nav.css">
+  <link rel="stylesheet" href="/style/common/sidebar.css">
   <link rel="stylesheet" href="/style/home/home.css">
   <title></title>
 </head>
@@ -16,9 +17,13 @@
     <!--分类标签-->
     <div class="category-tags">
       <ul>
-        <li><a href="/article">全部</a></li>
+        <li <%= label === 'all' ? 'class=active' : '' %>>
+          <a href="/article?label=all">全部</a>
+        </li>
         <% tags.forEach(function (item) { %>
-          <li><a href="/article?cateId=<%= item._id %>"><%= item.label %></a></li>
+          <li <%= label === item.label ? 'class=active' : '' %>>
+            <a href="/article?cateId=<%= item._id %>&label=<%= item.label %>"><%= item.label %></a>
+          </li>
         <% }) %>
       </ul>
     </div>
@@ -57,11 +62,7 @@
         </div>
       </div>
       <!--右侧边栏-->
-      <div class="other-info-wrapper">
-        <div>
-          <p>相关链接</p>
-        </div>
-      </div>
+      <%- include('components/sidebar') %>
     </div>
   </div>
 </div>
