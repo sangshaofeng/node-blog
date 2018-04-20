@@ -44,9 +44,12 @@
       type: 'get',
       dataType: 'json',
       success: function (res) {
-        currentPage = res.currentPage;
-        totalPages = res.totalPages;
-        renderArticles(res.data);
+        if (res.status === 'succ') {
+          $('body, html').animate({ scrollTop:0 }, 300);
+          currentPage = res.currentPage;
+          totalPages = res.totalPages;
+          renderArticles(res.data);
+        }
       }
     })
   }
