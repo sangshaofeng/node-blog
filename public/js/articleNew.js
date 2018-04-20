@@ -21,10 +21,10 @@
   // 提交文章数据按钮点击
   $('#submit-btn').click(function () {
     params.title = $('input[name=title]').val();
-    params.content = $('textarea[name=content]').val();
+    params.content = editor.txt.html();
     params.summary = $('input[name=summary]').val();
     params.author = $('input[name=author]').val();
-    params.labelId = editor.txt.html();
+    params.labelId = $('select[name=category]').val();
     params.cateLabel = $('select[name=category]').find('option:selected').text();
     submitArticle(params);
   })
