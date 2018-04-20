@@ -29,6 +29,7 @@
       var div = '<div class="empty"><span>暂时没有评论</span></div>';
       wrapper.append(div)
     } else {
+      $('span.comments').text(comm.length + '条评论')
       for (var i = 0; i < comm.length; i++) {
         var item = `<div class="comment-item">
                       <div class="top">
