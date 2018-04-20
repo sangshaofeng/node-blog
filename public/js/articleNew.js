@@ -2,6 +2,11 @@
 
 (function () {
 
+  var E = window.wangEditor
+  var editor = new E('#editor')
+  // 或者 var editor = new E( document.getElementById('editor') )
+  editor.create()
+
   var params = {
     title: '',
     content: '',
@@ -19,7 +24,7 @@
     params.content = $('textarea[name=content]').val();
     params.summary = $('input[name=summary]').val();
     params.author = $('input[name=author]').val();
-    params.labelId = $('select[name=category]').val();
+    params.labelId = editor.txt.html();
     params.cateLabel = $('select[name=category]').find('option:selected').text();
     submitArticle(params);
   })
