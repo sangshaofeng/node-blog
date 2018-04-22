@@ -14,8 +14,36 @@
 <%- include('components/sidebar') %>
 <div class="content-wrapper">
   <div class="content">
-    <%= menu %>
+    <div class="total">
+      <span>共找到 <b>0</b> 篇文章</span>
+    </div>
+    <div id="articles-wrapper" class="articles-wrapper">
+      <div>数据加载中...</div>
+    </div>
   </div>
 </div>
+
+<template id="article-tpl" type="text/x-jquery-tmpl">
+{{each(index, item) data}}
+  <div data-id="${item._id}" class="article-item">
+    <h4>${item.title}</h4>
+    <p>${item.summary}</p>
+    <div class="btns-wrapper">
+      <div class="btn btn-primary" role="btn-edit">编辑</div>
+      {{if item.isDeleted === '0'}}
+        <div class="btn btn-danger" role="btn-delete">下线</div>
+      {{/if}}
+      {{if item.isDeleted === '1'}}
+        <div class="btn btn-warning" role="btn-recovery">上线</div>
+      {{/if}}
+      <div class="btn btn-success" role="btn-comments">评论管理</div>
+    </div>
+  </div>
+{{/each}}
+</template>
+
+<script src="/js/library/jquery3.3.1.min.js"></script>
+<script src="/js/library/jquery.tmpl.min.js"></script>
+<script src="/js/articleList.js"></script>
 </body>
 </html>

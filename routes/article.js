@@ -55,7 +55,11 @@ router.get('/', function (req, res, next) {
 // 获取全部文章，后台使用
 // 包括isDeleted=1的文章
 router.get('/all', function (req, res, next) {
-  
+  Article.find({}).sort({'_id': -1}).exec(function (err, docs) {
+    if (!err) {
+      res.json({ data: docs, msg: '获取成功', status: 'succ', })
+    }
+  })
 })
 
 // 获取文章详情
@@ -106,14 +110,34 @@ router.post('/', function (req, res, next) {
   })
 })
 
-// 编辑文章
-router.put('/', function (req, res, next) {
+// 获取某一篇文章详情
+router.get('/item', function (req, res, next) {
 
 })
 
-// 删除文章，其下的评论也一并删除
-router.delete('/', function (err, doc) {
+// 编辑文章
+router.put('/', function (req, res, next) {
+  
+})
 
+// 删除文章，假删除
+router.delete('/', function (req, res, next) {
+  const id = req.body.id;
+  Article.findByIdAndUpdate(id, {$set: { isDeleted: '1' }}, { new: true }, function (err, doc) {
+    if (!err) {
+      res.json({ msg: '删除成功', status: 'succ' })
+    }
+  })
+})
+
+// 恢复删除文章
+router.post('/recovery', function (req, res, next) {
+  const id = req.body.id;
+  Article.findByIdAndUpdate(id, {$set: { isDeleted: '0' }}, { new: true }, function (err, doc) {
+    if (!err) {
+      res.json({ msg: '恢复成功', status: 'succ' })
+    }
+  })
 })
 
 module.exports = router;
