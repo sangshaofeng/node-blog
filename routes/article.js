@@ -7,22 +7,22 @@ const ArticleCate = require('../mongodb/schema').ArticleCate;
 var Article = mongoose.model('article', ArticleSchema);
 var Category = mongoose.model('category',  ArticleCate);
 
-// 获取首页文章和标签，ajax=true表示ajax请求，不加ajax字段表示直接客户端请求
+// 获取isDeleted=0的文章和全部标签，
+// ajax=true表示ajax请求，不加ajax字段表示直接客户端请求
 // doc是查询到的每页数据，result是全部数据
 router.get('/', function (req, res, next) {
   var cateId = req.query.cateId;
   var label = req.query.label;
   var page = parseInt(req.query.page)
   var ajax = req.query.ajax;
-  var query = Article.find({ category: cateId }).sort({'_id': -1});
+  var query = Article.find({ category: cateId, isDeleted: '0' }).sort({'_id': -1});
   if (!label || label === '') label = 'all';
   if (!page || page === '') page = 1;
   if (typeof cateId === 'undefined') {
-    query = Article.find({}).sort({'_id': -1});
-    Article.find({}).sort({'_id': -1});
+    query = Article.find({ isDeleted: '0' }).sort({'_id': -1});
     query.skip((page - 1) * 5); query.limit(5);
     query.exec(function (err, doc) {
-      Article.find({}, function (err, result) {
+      Article.find({ isDeleted: '0' }, function (err, result) {
         Category.find({}).exec(function (err, tags) {
           var totalPages = Math.ceil(result.length / 5);
           var currentPage = page;
@@ -37,7 +37,7 @@ router.get('/', function (req, res, next) {
   } else {
     query.skip((page - 1) * 5); query.limit(5);
     query.exec(function (err, doc) {
-      Article.find({ category: cateId }, function (err, result) {
+      Article.find({ category: cateId, isDeleted: '0' }, function (err, result) {
         Category.find({}).exec(function (err, tags) {
           var totalPages = Math.ceil(result.length / 5);
           var currentPage = page;
@@ -50,6 +50,12 @@ router.get('/', function (req, res, next) {
       })
     })
   }
+})
+
+// 获取全部文章，后台使用
+// 包括isDeleted=1的文章
+router.get('/all', function (req, res, next) {
+  
 })
 
 // 获取文章详情
