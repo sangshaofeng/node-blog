@@ -8,10 +8,12 @@
 
   $('#view-comments').click(function () {
     $('#comments-modal').fadeIn(150)
+    $('body').css('overflow-y', 'hidden');
   })
 
   $('#close-modal-btn').click(function () {
     $('#comments-modal').fadeOut(150)
+    $('body').css('overflow-y', 'auto');
   })
 
   $('#submit-btn').click(function () {
