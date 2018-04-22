@@ -20,6 +20,20 @@ $('body').css('background', '#f0f0f0');
       getAllArticles();
     })
   })
+
+  // 评论管理按钮点击
+  $('#articles-wrapper').on('click', 'div[role=btn-comments]', function () {
+    var id = $(this).parents('.article-item').attr('data-id');
+    $('#comments-wrapper').empty();
+    $('#comments-wrapper').append('<div class="loading-wrapper"><img class="loading" src="/images/loading.gif"></div>');
+    $('#comments-modal').fadeIn(150)
+    getComments(id);
+  })
+
+  // 评论模态框关闭
+  $('.modal-close-btn').click(function () {
+    $('#comments-modal').fadeOut(150)
+  })
   
   // 获取全部文章
   function getAllArticles () {
@@ -28,7 +42,6 @@ $('body').css('background', '#f0f0f0');
       type: 'get',
       dataType: 'json',
       success: function (res) {
-        console.log(res)
         renderArticles(res);
       }
     })
@@ -43,7 +56,6 @@ $('body').css('background', '#f0f0f0');
         data: { id: id },
         dataType: 'json',
         success: function (res) {
-          console.log(res)
           resolve()
         }
       })
@@ -59,7 +71,6 @@ $('body').css('background', '#f0f0f0');
         data: { id: id },
         dataType: 'json',
         success: function (res) {
-          console.log(res)
           resolve()
         }
       })
@@ -74,7 +85,7 @@ $('body').css('background', '#f0f0f0');
       dataType: 'json',
       success: function (res) {
         if (res.status === 'succ') {
-          renderComments(res.data)
+          renderComments(res);
         }
       }
     })
@@ -85,6 +96,16 @@ $('body').css('background', '#f0f0f0');
     var wrapper = $('#articles-wrapper');
     wrapper.empty();
     $('#article-tpl').tmpl(docs).appendTo(wrapper);
+  }
+
+  function renderComments (docs) {
+    var wrapper = $('#comments-wrapper');
+    wrapper.empty();
+    if (!docs || !docs.data.length) {
+      wrapper.append('<p class="empty">暂无评论</p>');
+    } else {
+      $('#comments-tpl').tmpl(docs).appendTo(wrapper);
+    }
   }
 
 }())

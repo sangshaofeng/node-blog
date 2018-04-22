@@ -54,4 +54,21 @@ router.post('/', function (req, res, next) {
   })
 })
 
+// 删除一条评论
+router.delete('/', function (req, res, next) {
+  const id = req.body.id;
+  const articleId = req.body.articleId;
+  Comments.remove({ _id: id }, function (err, doc) {
+    if (!err) {
+      Comments.count({ articleId: articleId }, function (err, count) {
+        Article.findById(articleId, function (err, article) {
+          article.set({ commentsAmount: count });
+          article.save();
+          res.json({ msg: '删除成功', status: 'succ' });
+        })
+      })
+    }
+  })
+})
+
 module.exports = router;

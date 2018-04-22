@@ -23,6 +23,18 @@
   </div>
 </div>
 
+<div id="comments-modal" class="modal-mask" style="display:none">
+  <div class="comments-modal">
+    <img class="modal-close-btn" src="/images/close_btn.svg" alt="">
+    <div class="modal-header">
+      <h4>文章标题</h4>
+    </div>
+    <div id="comments-wrapper" class="modal-body">
+      <p class="empty">暂无评论</p>
+    </div>
+  </div>
+</div>
+
 <template id="article-tpl" type="text/x-jquery-tmpl">
 {{each(index, item) data}}
   <div data-id="${item._id}" class="article-item">
@@ -36,8 +48,18 @@
       {{if item.isDeleted === '1'}}
         <div class="btn btn-warning" role="btn-recovery">上线</div>
       {{/if}}
-      <div class="btn btn-success" role="btn-comments">评论管理</div>
+      <div class="btn btn-success" role="btn-comments">评论管理(${item.commentsAmount})</div>
     </div>
+  </div>
+{{/each}}
+</template>
+
+<template id="comments-tpl" type="text/x-jquery-tmpl">
+{{each(index, item) data}}
+  <div data-id="${item._id}" class="comment-item">
+    <span>${item.nickname}</span>
+    <p>${item.comment}</p>
+    <div class="btn btn-danger">删除</div>
   </div>
 {{/each}}
 </template>
