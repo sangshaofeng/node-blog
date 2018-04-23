@@ -30,6 +30,11 @@ $('body').css('background', '#f0f0f0');
     getComments(id);
   })
 
+  // 评论删除按钮点击
+  $('#comments-wrapper').on('click', 'div[role=delete-comm-btn]', function () {
+    
+  })
+
   // 评论模态框关闭
   $('.modal-close-btn').click(function () {
     $('#comments-modal').fadeOut(150)
@@ -89,6 +94,11 @@ $('body').css('background', '#f0f0f0');
         }
       }
     })
+  }
+
+  // 删除一条评论
+  function deleteComment (id) {
+    
   }
 
   function renderArticles (docs) {
