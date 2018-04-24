@@ -34,3 +34,11 @@ exports.ArticleComments = new Schema({
   createdAt: { type: Date, default: Date.now() },
   articleId: { type: Schema.Types.ObjectId, ref: 'articles' }
 }, { versionKey: false })
+
+// 后台权限
+exprots.Administrator = new Schema({
+  account: { type: String },
+  passport: { type: String },
+  userRole: { type: String },
+  createdAt: { type: Date, default: Date.now() }
+})
