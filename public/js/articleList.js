@@ -3,6 +3,8 @@ $('body').css('background', '#f0f0f0');
 
 !(function () {
 
+  var articleId = '';
+
   getAllArticles()
 
   // 删除按钮点击
@@ -24,6 +26,9 @@ $('body').css('background', '#f0f0f0');
   // 评论管理按钮点击
   $('#articles-wrapper').on('click', 'div[role=btn-comments]', function () {
     var id = $(this).parents('.article-item').attr('data-id');
+    articleId = id;
+    var title = $(this).parents('.article-item').find('h4').text();
+    $('.modal-header').find('h4').text(title);
     $('#comments-wrapper').empty();
     $('#comments-wrapper').append('<div class="loading-wrapper"><img class="loading" src="/images/loading.gif"></div>');
     $('#comments-modal').fadeIn(150)
@@ -32,7 +37,8 @@ $('body').css('background', '#f0f0f0');
 
   // 评论删除按钮点击
   $('#comments-wrapper').on('click', 'div[role=delete-comm-btn]', function () {
-    
+    var id = $(this).parents('.comment-item').attr('data-id');
+    deleteComment(id, articleId);
   })
 
   // 评论模态框关闭
@@ -97,12 +103,26 @@ $('body').css('background', '#f0f0f0');
   }
 
   // 删除一条评论
-  function deleteComment (id) {
-    
+  function deleteComment (id, articleId) {
+    $.ajax({
+      url: '/comments',
+      type: 'delete',
+      data: {
+        id: id,
+        articleId: articleId
+      },
+      dataType: 'json',
+      success: function (res) {
+        if (res.status === 'succ') {
+          getComments(articleId);
+        }
+      }
+    })
   }
 
   function renderArticles (docs) {
-    $('.total span b').text(docs.data.length);
+    $('.total span.articles b').text(docs.data.length);
+    $('.total span.comments b').text(docs.commentsAmount);
     var wrapper = $('#articles-wrapper');
     wrapper.empty();
     $('#article-tpl').tmpl(docs).appendTo(wrapper);

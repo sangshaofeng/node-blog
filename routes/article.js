@@ -3,9 +3,11 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const ArticleSchema = require('../mongodb/schema').ArticleSchema;
 const ArticleCate = require('../mongodb/schema').ArticleCate;
+const ArticleComments = require('../mongodb/schema').ArticleComments;
 
 var Article = mongoose.model('article', ArticleSchema);
 var Category = mongoose.model('category',  ArticleCate);
+var Comments = mongoose.model('comment', ArticleComments);
 
 // 获取isDeleted=0的文章和全部标签，
 // ajax=true表示ajax请求，不加ajax字段表示直接客户端请求
@@ -57,7 +59,9 @@ router.get('/', function (req, res, next) {
 router.get('/all', function (req, res, next) {
   Article.find({}).sort({'_id': -1}).exec(function (err, docs) {
     if (!err) {
-      res.json({ data: docs, msg: '获取成功', status: 'succ', })
+      Comments.count({}, function (err, count) {
+        res.json({ data: docs, msg: '获取成功', status: 'succ', commentsAmount: count })
+      })
     }
   })
 })

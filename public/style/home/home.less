@@ -12,11 +12,15 @@
       li{
         font-weight: bold;
         cursor: pointer;
-        margin: 10px 20px 10px 0;
+        margin: 10px 13px 10px 0;
         a{
+          padding: 4px 12px;
+          border: 1px solid #bbb;
+          border-radius: 20px;
           transition: all .1s ease-in;
         }
         &.active a{
+          border: 1px solid @primary-color;
           color: @primary-color;
         }
       }
