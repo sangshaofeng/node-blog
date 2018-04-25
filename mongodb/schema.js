@@ -36,7 +36,7 @@ exports.ArticleComments = new Schema({
 }, { versionKey: false })
 
 // 后台权限
-exprots.Administrator = new Schema({
+exports.Administrator = new Schema({
   account: { type: String },
   passport: { type: String },
   userRole: { type: String },
