@@ -37,8 +37,8 @@ exports.ArticleComments = new Schema({
 
 // 后台权限
 exports.Administrator = new Schema({
-  account: { type: String },
-  passport: { type: String },
+  account: { type: String, unique: true },
+  password: { type: String },
   userRole: { type: String },
   createdAt: { type: Date, default: Date.now() }
-})
+}, { versionKey: false })

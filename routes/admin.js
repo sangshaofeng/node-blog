@@ -2,21 +2,49 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const sha1 = require('sha1');
 const Administrator = require('../mongodb/schema').Administrator;
+
+var Admin = mongoose.model('Administrator', Administrator);
 
 // 登录验证
 router.get('/signin', function (req, res, next) {
-
+  res.render('admin/signin')
 })
 
 // 创建账户
 router.post('/signup', function (req, res, next) {
+  const userInfo = {
+    account: req.body.account,
+    password: sha1(req.body.password),
+    userRole: req.body.role
+  }
 
+  if (!userInfo.account || userInfo.account === '') {
+    res.json({ msg: '缺少用户名', status: 'err' })
+    return false;
+  } else if (!userInfo.password || userInfo.password === '') {
+    res.json({ msg: '缺少密码', status: 'err' })
+    return false;
+  } else if (!userInfo.userRole || userInfo.userRole === '') {
+    res.json({ msg: '缺少角色', status: 'err' })
+    return false;
+  }
+
+  Admin.create(userInfo, function (err, doc) {
+    if (!err) {
+      res.json({ msg: '注册成功', status: 'succ', })
+    } else {
+      if (err.code === 11000) {
+        res.json({ msg: '用户名已存在', status: 'err', })
+      }
+    }
+  })
 })
 
 // 退出登录
 router.post('/signout', function (req, res, next) {
-  
+
 })
 
 // 文章列表
