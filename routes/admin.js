@@ -7,9 +7,27 @@ const Administrator = require('../mongodb/schema').Administrator;
 
 var Admin = mongoose.model('Administrator', Administrator);
 
-// 登录验证
+// 登录路由
 router.get('/signin', function (req, res, next) {
   res.render('admin/signin')
+})
+
+// 登录验证
+router.post('/signin', function (req, res, next) {
+  const account = req.body.account;
+  const password = req.body.password;
+  Admin.find({ account: account }, function (err, doc) {
+    if (!doc.length) {
+      return res.json({ status: 'err', msg: '用户不存在' })
+    }
+    if (doc[0].password !== sha1(password)) {
+      return res.json({ status: 'err', msg: '密码错误' })
+    }
+
+    delete doc[0].password;
+    req.session.user = doc[0];
+    return res.json({ status: 'succ', msg: '登录成功' })
+  })
 })
 
 // 创建账户
