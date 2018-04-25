@@ -19,9 +19,12 @@
   "homepage": "https://github.com/sangshaofeng/node-blog#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "connect-mongo": "^2.0.1",
     "ejs": "^2.5.8",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "less-middleware": "^2.2.1",
-    "mongoose": "^5.0.14"
+    "mongoose": "^5.0.14",
+    "sha1": "^1.1.1"
   }
 }
