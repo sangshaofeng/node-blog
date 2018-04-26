@@ -45,7 +45,7 @@ $('body').css('background', '#f0f0f0');
   $('.modal-close-btn').click(function () {
     $('#comments-modal').fadeOut(150)
   })
-  
+
   // 获取全部文章
   function getAllArticles () {
     $.ajax({
@@ -67,7 +67,11 @@ $('body').css('background', '#f0f0f0');
         data: { id: id },
         dataType: 'json',
         success: function (res) {
-          resolve()
+          if (res.status === 'err') {
+            alert(res.msg)
+          } else if (res.status === 'succ') {
+            resolve()
+          }
         }
       })
     })
@@ -82,7 +86,11 @@ $('body').css('background', '#f0f0f0');
         data: { id: id },
         dataType: 'json',
         success: function (res) {
-          resolve()
+          if (res.status === 'err') {
+            alert(res.msg)
+          } else if (res.status === 'succ') {
+            resolve()
+          }
         }
       })
     })
@@ -115,6 +123,8 @@ $('body').css('background', '#f0f0f0');
       success: function (res) {
         if (res.status === 'succ') {
           getComments(articleId);
+        } else if (res.status === 'err') {
+          alert(res.msg)
         }
       }
     })

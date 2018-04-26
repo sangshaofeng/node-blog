@@ -56,6 +56,12 @@ router.post('/', function (req, res, next) {
 
 // 删除一条评论
 router.delete('/', function (req, res, next) {
+  if (!req.session.user) {
+    return res.json({ msg: '未登录', status: 'err' })
+  } else if (req.session.user.userRole !== 'ADMIN') {
+    return res.json({ msg: '没有操作权限', status: 'err' })
+  }
+
   const id = req.body.id;
   const articleId = req.body.articleId;
   Comments.remove({ _id: id }, function (err, doc) {

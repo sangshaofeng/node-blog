@@ -73,9 +73,10 @@
       },
       dataType: 'json',
       success: function (res) {
-        alert(res);
         if (res.status === 'succ') {
           $('#add-tags-modal').fadeOut(150);
+        } else if (res.status === 'err') {
+          alert(res.msg);
         }
       }
     })
