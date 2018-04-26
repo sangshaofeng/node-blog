@@ -76,6 +76,12 @@ router.get('/details', function (req, res, next) {
 
 // 新增一篇文章
 router.post('/', function (req, res, next) {
+  if (!req.session.user) {
+    return res.json({ msg: '未登录', status: 'err' })
+  } else if (req.session.user.userRole !== 'ADMIN') {
+    return res.json({ msg: '没有操作权限', status: 'err' })
+  }
+
   const articleObject = {
     title: req.body.title,
     content: req.body.content,
@@ -86,23 +92,17 @@ router.post('/', function (req, res, next) {
   }
 
   if (!articleObject.title || articleObject.title === '') {
-    res.json({ msg: '缺少文章标题', status: 'err' });
-    return false;
+    return res.json({ msg: '缺少文章标题', status: 'err' });
   } else if (!articleObject.content || articleObject.content === '') {
-    res.json({ msg: '缺少文章内容', status: 'err' });
-    return false;
+    return res.json({ msg: '缺少文章内容', status: 'err' });
   } else if (!articleObject.summary || articleObject.summary === '') {
-    res.json({ msg: '缺少文章摘要', status: 'err' });
-    return false;
+    return res.json({ msg: '缺少文章摘要', status: 'err' });
   } else if (!articleObject.author || articleObject.author === '') {
-    res.json({ msg: '缺少作者', status: 'err' });
-    return false;
+    return res.json({ msg: '缺少作者', status: 'err' });
   } else if (!articleObject.cateLabel || articleObject.cateLabel === '') {
-    res.json({ msg: '缺少分类标签名者', status: 'err' });
-    return false;
+    return res.json({ msg: '缺少分类标签名者', status: 'err' });
   } else if (!articleObject.category || articleObject.category === '') {
-    res.json({ msg: '缺少文章分类', status: 'err' });
-    return false;
+    return res.json({ msg: '缺少文章分类', status: 'err' });
   }
 
   Article.create(articleObject, function (err, doc) {
@@ -121,11 +121,21 @@ router.get('/item', function (req, res, next) {
 
 // 编辑文章
 router.put('/', function (req, res, next) {
-  
+  if (!req.session.user) {
+    return res.json({ msg: '未登录', status: 'err' })
+  } else if (req.session.user.userRole !== 'ADMIN') {
+    return res.json({ msg: '没有操作权限', status: 'err' })
+  }
 })
 
 // 删除文章，假删除
 router.delete('/', function (req, res, next) {
+  if (!req.session.user) {
+    return res.json({ msg: '未登录', status: 'err' })
+  } else if (req.session.user.userRole !== 'ADMIN') {
+    return res.json({ msg: '没有操作权限', status: 'err' })
+  }
+
   const id = req.body.id;
   Article.findByIdAndUpdate(id, {$set: { isDeleted: '1' }}, { new: true }, function (err, doc) {
     if (!err) {
@@ -136,6 +146,12 @@ router.delete('/', function (req, res, next) {
 
 // 恢复删除文章
 router.post('/recovery', function (req, res, next) {
+  if (!req.session.user) {
+    return res.json({ msg: '未登录', status: 'err' })
+  } else if (req.session.user.userRole !== 'ADMIN') {
+    return res.json({ msg: '没有操作权限', status: 'err' })
+  }
+  
   const id = req.body.id;
   Article.findByIdAndUpdate(id, {$set: { isDeleted: '0' }}, { new: true }, function (err, doc) {
     if (!err) {
