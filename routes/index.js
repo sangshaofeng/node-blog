@@ -4,15 +4,6 @@ module.exports = function (app) {
     res.redirect('/article');
   })
 
-  // 后台路由是否登录校验
-  app.get('/admin', function (req, res, next) {
-    if (!req.session.user) {
-      res.redirect('/admin/signin')
-    } else {
-      res.redirect('/admin/article-list')
-    }
-  })
-
   app.use('/article', require('./article'));
   app.use('/category', require('./category'));
   app.use('/comments', require('./comments'));

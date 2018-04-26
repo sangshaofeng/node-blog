@@ -68,12 +68,20 @@ router.get('/signout', function (req, res, next) {
 
 // 文章列表
 router.get('/article-list', function (req, res, next) {
-  res.render('admin/articleList', { menu: 'articlelist' });
+  if (!req.session.user) {
+    res.redirect('/admin/signin')
+  } else {
+    res.render('admin/articleList', { menu: 'articlelist' });
+  }
 })
 
 // 新建文章
 router.get('/article-new', function (req, res, next) {
-  res.render('admin/articleNew', { menu: 'articlenew' });
+  if (!req.session.user) {
+    res.redirect('/admin/signin')
+  } else {
+    res.render('admin/articleNew', { menu: 'articlenew' })
+  };
 })
 
 module.exports = router;
