@@ -61,8 +61,9 @@ router.post('/signup', function (req, res, next) {
 })
 
 // 退出登录
-router.post('/signout', function (req, res, next) {
-
+router.get('/signout', function (req, res, next) {
+  req.session.user = null;
+  res.redirect('/admin/signin')
 })
 
 // 文章列表
