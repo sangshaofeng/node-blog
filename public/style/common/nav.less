@@ -15,17 +15,35 @@
       float: right;
       li{
         float: left;
-        margin: 0 15px;
         line-height: 60px;
+        a{
+          padding: 20px;
+          height: 100%;
+        }
+        &.active{
+          a{
+            color: #fff;
+          }
+          background: #0084ff;
+        }
       }
     }
   }
 }
 @media screen and (max-width: 450px) {
   .header-nav{
+    height: 50px;
     .header-main{
       width: 100%;
       box-sizing: border-box;
+      .nav-list{
+        li{
+          line-height: 50px;
+          a{
+            padding: 15px;
+          }
+        }
+      }
     }
   }
 }
