@@ -162,6 +162,7 @@
     $('textarea[name=content]').val('');
     $('input[name=summary]').val('');
     $('input[name=author]').val('');
+    editor.txt.html('');
   }
 
   function getUrlParam (key) {
