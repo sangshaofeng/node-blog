@@ -39,14 +39,11 @@ router.post('/signup', function (req, res, next) {
   }
 
   if (!userInfo.account || userInfo.account === '') {
-    res.json({ msg: '缺少用户名', status: 'err' })
-    return false;
+    return res.json({ msg: '缺少用户名', status: 'err' })
   } else if (!userInfo.password || userInfo.password === '') {
-    res.json({ msg: '缺少密码', status: 'err' })
-    return false;
+    return res.json({ msg: '缺少密码', status: 'err' })
   } else if (!userInfo.userRole || userInfo.userRole === '') {
-    res.json({ msg: '缺少角色', status: 'err' })
-    return false;
+    return res.json({ msg: '缺少角色', status: 'err' })
   }
 
   Admin.create(userInfo, function (err, doc) {
