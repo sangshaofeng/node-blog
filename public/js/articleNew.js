@@ -77,7 +77,10 @@
       data: params,
       dataType: 'json',
       success: function (res) {
-        console.log(res)
+        alert(res.msg);
+        if (res.status === 'succ') {
+          resetValue()
+        }
       }
     })
   }
