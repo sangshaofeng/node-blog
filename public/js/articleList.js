@@ -11,7 +11,7 @@ $('body').css('background', '#f0f0f0');
   $('#articles-wrapper').on('click', 'div[role=btn-edit]', function () {
     if (userRole !== 'ADMIN') return alert('没有操作权限');
     articleId = $(this).parents('.article-item').attr('data-id');
-    window.open('/admin/article-new?id=' + articleId);
+    window.location.href = '/admin/article-new?id=' + articleId;
   })
 
   // 删除按钮点击
