@@ -71,7 +71,8 @@ router.get('/article-list', function (req, res, next) {
   if (!req.session.user) {
     res.redirect('/admin/signin')
   } else {
-    res.render('admin/articleList', { menu: 'articlelist' });
+    var account = req.session.user.account;
+    res.render('admin/articleList', { menu: 'articlelist', account: account });
   }
 })
 
@@ -80,7 +81,8 @@ router.get('/article-new', function (req, res, next) {
   if (!req.session.user) {
     res.redirect('/admin/signin')
   } else {
-    res.render('admin/articleNew', { menu: 'articlenew' })
+    var account = req.session.user.account;
+    res.render('admin/articleNew', { menu: 'articlenew', account: account })
   };
 })
 
