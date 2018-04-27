@@ -69,7 +69,8 @@ router.get('/article-list', function (req, res, next) {
     res.redirect('/admin/signin')
   } else {
     var account = req.session.user.account;
-    res.render('admin/articleList', { menu: 'articlelist', account: account });
+    var role = req.session.user.userRole;
+    res.render('admin/articleList', { menu: 'articlelist', account: account, role: role });
   }
 })
 

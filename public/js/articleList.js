@@ -7,6 +7,12 @@ $('body').css('background', '#f0f0f0');
 
   getAllArticles()
 
+  // 编辑按钮点击
+  $('#articles-wrapper').on('click', 'div[role=btn-edit]', function () {
+    if (userRole !== 'ADMIN') return alert('没有操作权限');
+    articleId = $(this).parents('.article-item').attr('data-id');
+  })
+
   // 删除按钮点击
   $('#articles-wrapper').on('click', 'div[role=btn-delete]', function () {
     var id = $(this).parents('.article-item').attr('data-id')
