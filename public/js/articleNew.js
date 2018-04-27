@@ -2,6 +2,8 @@
 
 (function () {
 
+  var id = getUrlParam('id');
+
   var E = window.wangEditor
   var editor = new E('#editor')
   // 或者 var editor = new E( document.getElementById('editor') )
@@ -16,7 +18,11 @@
     cateLabel: ''
   }
 
-  getCateTags();
+  if (id && id !== '') {
+    getCateTags().then(() => {
+      getArticleDetails(id)
+    });
+  } else getCateTags();
 
   // 提交文章数据按钮点击
   $('#submit-btn').click(function () {
@@ -26,7 +32,9 @@
     params.author = $('input[name=author]').val();
     params.labelId = $('select[name=category]').val();
     params.cateLabel = $('select[name=category]').find('option:selected').text();
-    submitArticle(params);
+    if (id && id !== '') {
+      editArticle(id, params);
+    } else submitArticle(params);
   })
 
   // 添加标签模态框显示隐藏
@@ -49,17 +57,54 @@
     submitCateTag(labelName);
   })
 
-  // 获取全部分类标签
-  function getCateTags () {
+  // 编辑状态下获取文章详情
+  function getArticleDetails (id) {
     $.ajax({
-      url: '/category/tags',
+      url: '/article/item?id=' + id,
       type: 'get',
       dataType: 'json',
       success: function (res) {
-        if (res.status === 'succ') {
-          appendTags(res.data);
-        }
+        appendEditData(res.data[0])
       }
+    })
+  }
+
+  // 编辑状态下提交文章
+  function editArticle (id, params) {
+    $.ajax({
+      url: '/article?id=' + id,
+      type: 'put',
+      data: params,
+      dataType: 'json',
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  }
+
+  // 编辑时插入数据
+  function appendEditData (doc) {
+    $('select[name=category]').val(doc.category);
+    $('input[name=title]').val(doc.title);
+    $('input[name=summary]').val(doc.summary);
+    $('input[name=author]').val(doc.author);
+    editor.txt.html(doc.content);
+  }
+
+  // 获取全部分类标签
+  function getCateTags () {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: '/category/tags',
+        type: 'get',
+        dataType: 'json',
+        success: function (res) {
+          if (res.status === 'succ') {
+            appendTags(res.data);
+            resolve();
+          }
+        }
+      })
     })
   }
 
@@ -114,6 +159,13 @@
     $('textarea[name=content]').val('');
     $('input[name=summary]').val('');
     $('input[name=author]').val('');
+  }
+
+  function getUrlParam (key) {
+    var url = window.location.search;
+    var reg = new RegExp('(^|&)' + key + '=([^&]*)(&|$)');
+    var result = url.substr(1).match(reg);
+    return result ? decodeURIComponent(result[2]) : null;
   }
 
 })()

@@ -114,9 +114,16 @@ router.post('/', function (req, res, next) {
   })
 })
 
-// 获取某一篇文章详情
+// 获取某一篇文章详情，ajax获取
 router.get('/item', function (req, res, next) {
-
+  const id = req.query.id;
+  Article.find({ _id: id }, function (err, doc) {
+    if (!err) {
+      res.json({ data: doc, msg: '获取成功', status: 'succ' })
+    } else {
+      console.log(err)
+    }
+  })
 })
 
 // 编辑文章
@@ -126,6 +133,41 @@ router.put('/', function (req, res, next) {
   } else if (req.session.user.userRole !== 'ADMIN') {
     return res.json({ msg: '没有操作权限', status: 'err' })
   }
+  const id = req.query.id;
+  const title = req.body.title;
+  const content = req.body.content;
+  const summary = req.body.summary;
+  const author = req.body.author;
+  const category = req.body.labelId;
+  const cateLabel = req.body.cateLabel;
+  if (!title || title === '') {
+    return res.json({ msg: '缺少文章标题', status: 'err' });
+  } else if (!content || content === '') {
+    return res.json({ msg: '缺少文章内容', status: 'err' });
+  } else if (!summary || summary === '') {
+    return res.json({ msg: '缺少文章摘要', status: 'err' });
+  } else if (!author || author === '') {
+    return res.json({ msg: '缺少作者', status: 'err' });
+  } else if (!cateLabel || cateLabel === '') {
+    return res.json({ msg: '缺少分类标签名者', status: 'err' });
+  } else if (!category || category === '') {
+    return res.json({ msg: '缺少文章分类', status: 'err' });
+  }
+  Article.findByIdAndUpdate(id, {$set: {
+    title: title,
+    content: content,
+    summary: summary,
+    author: author,
+    category: category,
+    cateLabel: cateLabel,
+    updateAt: Date.now()
+  }}, { new: true }, function (err, doc) {
+    if (!err) {
+      console.log(doc)
+      res.json({ msg: '修改成功', status: 'succ' });
+    }
+  })
+
 })
 
 // 删除文章，假删除
@@ -151,7 +193,7 @@ router.post('/recovery', function (req, res, next) {
   } else if (req.session.user.userRole !== 'ADMIN') {
     return res.json({ msg: '没有操作权限', status: 'err' })
   }
-  
+
   const id = req.body.id;
   Article.findByIdAndUpdate(id, {$set: { isDeleted: '0' }}, { new: true }, function (err, doc) {
     if (!err) {
