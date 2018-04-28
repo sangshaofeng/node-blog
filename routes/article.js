@@ -22,11 +22,11 @@ router.get('/', function (req, res, next) {
   if (!page || page === '') page = 1;
   if (typeof cateId === 'undefined') {
     query = Article.find({ isDeleted: '0' }).sort({'_id': -1});
-    query.skip((page - 1) * 5); query.limit(5);
+    query.skip((page - 1) * 6); query.limit(6);
     query.exec(function (err, doc) {
       Article.find({ isDeleted: '0' }, function (err, result) {
         Category.find({}).exec(function (err, tags) {
-          var totalPages = Math.ceil(result.length / 5);
+          var totalPages = Math.ceil(result.length / 6);
           var currentPage = page;
           if (!ajax) {
             res.render('blog/home', { articles: doc, tags: tags, label: label, totalPages: totalPages, currentPage: currentPage })
@@ -37,11 +37,11 @@ router.get('/', function (req, res, next) {
       })
     })
   } else {
-    query.skip((page - 1) * 5); query.limit(5);
+    query.skip((page - 1) * 6); query.limit(6);
     query.exec(function (err, doc) {
       Article.find({ category: cateId, isDeleted: '0' }, function (err, result) {
         Category.find({}).exec(function (err, tags) {
-          var totalPages = Math.ceil(result.length / 5);
+          var totalPages = Math.ceil(result.length / 6);
           var currentPage = page;
           if (!ajax) {
             res.render('blog/home', { articles: doc, tags: tags, label: label, totalPages: totalPages, currentPage: currentPage })
