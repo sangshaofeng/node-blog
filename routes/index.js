@@ -8,6 +8,7 @@ module.exports = function (app) {
   app.use('/category', require('./category'));
   app.use('/comments', require('./comments'));
   app.use('/admin', require('./admin'));
+  app.use('/about', require('./about'));
 
   // 处理404页面
   app.use(function (req, res, next) {

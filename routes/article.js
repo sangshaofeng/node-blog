@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
           var totalPages = Math.ceil(result.length / 6);
           var currentPage = page;
           if (!ajax) {
-            res.render('blog/home', { articles: doc, tags: tags, label: label, totalPages: totalPages, currentPage: currentPage })
+            res.render('blog/home', { articles: doc, tags: tags, label: label, navLabel: 'home', totalPages: totalPages, currentPage: currentPage })
           } else {
             res.json({ data: doc, totalPages: totalPages, currentPage: currentPage, msg: '获取成功', status: 'succ' })
           }
@@ -44,7 +44,7 @@ router.get('/', function (req, res, next) {
           var totalPages = Math.ceil(result.length / 6);
           var currentPage = page;
           if (!ajax) {
-            res.render('blog/home', { articles: doc, tags: tags, label: label, totalPages: totalPages, currentPage: currentPage })
+            res.render('blog/home', { articles: doc, tags: tags, label: label, navLabel: 'home', totalPages: totalPages, currentPage: currentPage })
           } else {
             res.json({ data: doc, totalPages: totalPages, currentPage: currentPage, msg: '获取成功', status: 'succ' })
           }
@@ -70,7 +70,7 @@ router.get('/all', function (req, res, next) {
 router.get('/details', function (req, res, next) {
   const id = req.query.id;
   Article.find({ _id: id }, function (err, doc) {
-    res.render('blog/article', { article: doc, test: {name: 'haha'} })
+    res.render('blog/article', { article: doc, navLabel: null});
   })
 })
 
