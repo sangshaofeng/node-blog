@@ -1,7 +1,30 @@
+@import "../utils.less";
 .other-info-wrapper{
   width: 300px;
-  height: 200px;
-  p{
-    font-weight: bold;
+  .links{
+    width: 100%;
+    padding: 0 20px;
+    p{
+      margin-left: 10px;
+      font-weight: bold;
+    }
+    .wrapper{
+      margin: 16px 0 0 0;
+      border-radius: 5px;
+      box-sizing: border-box;
+      .flex-layout(flex, row wrap, flex-start, flex-start);
+      .item{
+        width: 80px;
+        padding: 10px;
+        margin: 0 20px 20px 0;
+        cursor: pointer;
+        box-sizing: border-box;
+        border-radius: 4px;
+        box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
+        &:hover{
+          box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.4);
+        }
+      }
+    }
   }
 }
