@@ -165,7 +165,6 @@ router.put('/', function (req, res, next) {
     updateAt: Date.now()
   }}, { new: true }, function (err, doc) {
     if (!err) {
-      console.log(doc)
       res.json({ msg: '修改成功', status: 'succ' });
     }
   })
