@@ -11,10 +11,10 @@
     var top = $('html').scrollTop();
     if (top > 65) {
       $('#nav-logo').css('display', 'none');
-      $('#nav-title').fadeIn();
+      $('#nav-title').css('display', 'block');
     } else {
       $('#nav-title').css('display', 'none');
-      $('#nav-logo').fadeIn();
+      $('#nav-logo').css('display', 'block');
     }
   })
 
