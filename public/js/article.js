@@ -3,7 +3,7 @@
 (function () {
 
   var articleId = getUrlParam('id')
-  $('#article-title').find('h3').text($('.article-details-wrapper').find('h3').text());
+  $('#nav-title').find('h3').text($('#article-title').text());
 
   getComments(articleId);
 
@@ -11,9 +11,9 @@
     var top = $('html').scrollTop();
     if (top > 65) {
       $('#nav-logo').css('display', 'none');
-      $('#article-title').fadeIn();
+      $('#nav-title').fadeIn();
     } else {
-      $('#article-title').css('display', 'none');
+      $('#nav-title').css('display', 'none');
       $('#nav-logo').fadeIn();
     }
   })
