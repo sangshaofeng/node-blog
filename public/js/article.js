@@ -3,8 +3,20 @@
 (function () {
 
   var articleId = getUrlParam('id')
+  $('#article-title').find('h3').text($('.article-details-wrapper').find('h3').text());
 
   getComments(articleId);
+
+  $(document).scroll(function () {
+    var top = $('html').scrollTop();
+    if (top > 65) {
+      $('#nav-logo').css('display', 'none');
+      $('#article-title').fadeIn();
+    } else {
+      $('#article-title').css('display', 'none');
+      $('#nav-logo').fadeIn();
+    }
+  })
 
   $('#view-comments').click(function () {
     $('#comments-modal').fadeIn(150)
