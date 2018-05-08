@@ -79,7 +79,7 @@
       success: function (res) {
         alert(res.msg);
         if (res.status === 'succ') {
-          resetValue()
+
         }
       }
     })
