@@ -71,7 +71,8 @@ router.get('/details', function (req, res, next) {
   const id = req.query.id;
   Article.find({ _id: id }, function (err, doc) {
     Article.count({ isDeleted: '0' }, function (err, total) {
-      res.render('blog/article', { article: doc, navLabel: null, articleAmount: total });
+      var totalPages = Math.ceil(total / 6);
+      res.render('blog/article', { article: doc, navLabel: null, articleAmount: total, totalPages: totalPages });
     })
   })
 })
