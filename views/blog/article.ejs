@@ -19,7 +19,7 @@
           <h3 id="article-title"><%= article[0].title %></h3>
           <div class="info">
             <span>作者：<span><%= article[0].author %></span></span>
-            <span class="published-at">发布时间：<%= article[0].meta.createdAt %></span>
+            <span class="published-at">分类：<%= article[0].cateLabel %></span>
           </div>
           <article class="content">
             <%- article[0].content %>
