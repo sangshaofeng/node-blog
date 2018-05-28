@@ -47,9 +47,9 @@
       for (var i = 0; i < comm.length; i++) {
         var item = '<div class="comment-item">' +
                       '<div class="top">' +
-                        '<img class="avatar" src="/images/avatar.svg" alt=""><span class="nickname">${comm[i].nickname}</span>' +
+                        '<img class="avatar" src="/images/avatar.svg" alt=""><span class="nickname">'+ comm[i].nickname +'</span>' +
                       '</div>' +
-                      '<div class="content"><p>${comm[i].comment}</p></div>' +
+                      '<div class="content"><p>'+ comm[i].comment +'</p></div>' +
                     '</div>';
         wrapper.append(item);
       }
