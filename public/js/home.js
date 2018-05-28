@@ -55,7 +55,6 @@
   }
 
   // 渲染文章，使用tmpl模板和ejs有冲突，直接js写模板
-  // 需要浏览器兼容es6语法
   function renderArticles (doc) {
     var wrapper = $('#articles-wrapper')
     wrapper.empty();
@@ -66,7 +65,7 @@
           '<span>作者：<span>'+ doc[i].author +'</span></span>' +
           '<span class="category">分类：'+ doc[i].cateLabel +'</span>' +
         '</div>' +
-        '<h3><a href="/article/details?id=${doc[i]._id}">'+ doc[i].title +'</a></h3>' +
+        '<h3><a href="/article/details?id='+ doc[i]._id +'">'+ doc[i].title +'</a></h3>' +
         '<p>'+ doc[i].summary +'</p>' +
         '<div class="article-footer">' +
           '<div class="comments-wrapper">' +
