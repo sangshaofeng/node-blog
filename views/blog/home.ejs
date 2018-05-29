@@ -32,6 +32,9 @@
       <div class="left-area">
         <!--文章列表-->
         <div id="articles-wrapper" class="articles-wrapper">
+          <% if (!articles.length) { %>
+            <div style="text-align:center;color:#a0a0a0;margin-top: 30px;">该分类下暂时没有文章</div>
+          <% } %>
           <% articles.forEach(function (item) { %>
           <div class="article-item">
             <div class="article-header">
@@ -54,13 +57,15 @@
           <% }) %>
         </div>
         <!--分页-->
-        <div class="pagination">
-          <div id="curr-total-count" class="block curr-total-count"><%= currentPage %> / <%= totalPages %></div>
-          <div id="btn-first" class="block">首页</div>
-          <div id="btn-prev" class="block">上一页</div>
-          <div id="btn-next" class="block">下一页</div>
-          <div id="btn-last" class="block">末页</div>
-        </div>
+        <% if (articles.length > 5) { %>
+            <div class="pagination">
+              <div id="curr-total-count" class="block curr-total-count"><%= currentPage %> / <%= totalPages %></div>
+              <div id="btn-first" class="block">首页</div>
+              <div id="btn-prev" class="block">上一页</div>
+              <div id="btn-next" class="block">下一页</div>
+              <div id="btn-last" class="block">末页</div>
+            </div>
+        <% } %>
       </div>
       <!--右侧边栏-->
       <%- include('components/sidebar') %>
