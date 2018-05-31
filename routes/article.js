@@ -172,6 +172,23 @@ router.put('/', function (req, res, next) {
 
 })
 
+// 删除一篇文章，真删除
+router.delete('/item', function (req, res, next) {
+    if (!req.session.user) {
+      return res.json({ msg: '未登录', status: 'err' })
+    } else if (req.session.user.userRole !== 'ADMIN') {
+      return res.json({ msg: '没有操作权限', status: 'err' })
+    }
+
+    const id = req.body.id;
+    Article.findByIdAndRemove(id, function (err, doc) {
+        console.log(doc)
+        if (!err) {
+            res.json({ data: [], status: 'succ', msg: '删除成功' })
+        }
+    })
+})
+
 // 删除文章，假删除
 router.delete('/', function (req, res, next) {
   if (!req.session.user) {

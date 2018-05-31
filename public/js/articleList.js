@@ -42,6 +42,14 @@ $('body').css('background', '#f0f0f0');
     getComments(id);
   })
 
+  // 真删除按钮点击
+  $('#articles-wrapper').on('click', 'div[role=btn-real-delete]', function () {
+      if (window.confirm('确定删除？')) {
+          var id = $(this).parents('.article-item').attr('data-id')
+          realDeleteArticle(id);
+      }
+  })
+
   // 评论删除按钮点击
   $('#comments-wrapper').on('click', 'div[role=delete-comm-btn]', function () {
     var id = $(this).parents('.comment-item').attr('data-id');
@@ -63,6 +71,21 @@ $('body').css('background', '#f0f0f0');
         renderArticles(res);
       }
     })
+  }
+
+  // 真删除文章
+  function realDeleteArticle (id) {
+      $.ajax({
+          url: '/article/item',
+          type: 'delete',
+          data: { id: id },
+          dataType: 'json',
+          success: function (res) {
+              if (res.status === 'succ') {
+                  getAllArticles()
+              }
+          }
+      })
   }
 
   // 删除文章
