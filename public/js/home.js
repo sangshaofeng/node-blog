@@ -1,5 +1,6 @@
 !(function () {
 
+  var ajaxLoader = new AjaxLoader();
   var cateId = getUrlParam('cateId');
 
   // 首页点击
@@ -35,6 +36,7 @@
   })
 
   function getArticles (cateId, page) {
+    ajaxLoader.start();
     var url = '/article';
     if (page && page !== '') url += '?page=' + page;
     if (cateId !== null) url += '&cateId=' + cateId;
@@ -45,11 +47,15 @@
       dataType: 'json',
       success: function (res) {
         if (res.status === 'succ') {
+          ajaxLoader.finish();
           $('body, html').animate({ scrollTop:0 }, 300);
           currentPage = res.currentPage;
           totalPages = res.totalPages;
           renderArticles(res.data);
         }
+      },
+      error: function () {
+        ajaxLoader.error();
       }
     })
   }
