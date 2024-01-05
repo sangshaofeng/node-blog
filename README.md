@@ -11,4 +11,3 @@ npm install
 // 启动项目
 node index
 ```
-**博客线上地址：<http://blog.sangshaofeng.site:3000>**
